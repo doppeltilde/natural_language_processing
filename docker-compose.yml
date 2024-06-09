@@ -1,7 +1,6 @@
 services:
-  image_video_classification:
-    build: .
-    #image: ghcr.io/doppeltilde/image_video_classification:latest
+  natural_language_processing:
+    image: ghcr.io/doppeltilde/natural_language_processing:latest
     ports:
       - "8000:8000"
     volumes:
