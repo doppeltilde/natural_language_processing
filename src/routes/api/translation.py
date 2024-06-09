@@ -1,4 +1,4 @@
-from fastapi import APIRouter, UploadFile, File, HTTPException, Query, Depends
+from fastapi import APIRouter, Query, Depends
 from src.middleware.auth.auth import get_api_key
 from src.shared.shared import translation_model
 
