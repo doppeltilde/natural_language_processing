@@ -7,8 +7,8 @@ load_dotenv()
 
 access_token = os.getenv("ACCESS_TOKEN", None)
 
-default_summarize_model_name = os.getenv(
-    "DEFAULT_SUMMARIZE_MODEL_NAME", "Falconsai/text_summarization"
+default_summarization_model_name = os.getenv(
+    "DEFAULT_SUMMARIZATION_MODEL_NAME", "Falconsai/text_summarization"
 )
 default_translation_model_name = os.getenv(
     "DEFAULT_TRANSLATION_MODEL_NAME", "google-t5/t5-base"
@@ -22,9 +22,9 @@ api_keys = api_keys_str.split(",") if api_keys_str else []
 use_api_keys = os.getenv("USE_API_KEYS", "False").lower() in ["true", "1", "yes"]
 
 
-def summarize_model(model_name):
+def summarization_model(model_name):
     try:
-        _model_name = model_name or default_summarize_model_name
+        _model_name = model_name or default_summarization_model_name
 
         summarizer = pipeline(
             "summarization",

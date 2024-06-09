@@ -15,7 +15,7 @@ async def translation(
     translator = translation_model(model_name, input_language, output_language)
 
     try:
-        translation = await translator(text)
+        translation = translator(text)
         return {"res": translation}
 
     except Exception as e:

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException, Query, Depends
 from src.middleware.auth.auth import get_api_key
-from src.shared.shared import summarize_model
+from src.shared.shared import summarization_model
 
 router = APIRouter()
 
@@ -10,9 +10,9 @@ async def summarization(
     text: str,
     model_name: str = Query(None),
 ):
-    summarizer = summarize_model(model_name)
+    summarizer = summarization_model(model_name)
     try:
-        summary = await summarizer(text)
+        summary = summarizer(text)
         return {"res": summary}
 
     except Exception as e:
