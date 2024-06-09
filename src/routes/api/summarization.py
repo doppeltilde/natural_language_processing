@@ -12,7 +12,8 @@ async def summarization(
 ):
     summarizer = summarize_model(model_name)
     try:
-        return {"res": summarizer(text)}
+        summary = await summarizer(text)
+        return {"res": summary}
 
     except Exception as e:
         print("Something went wrong: ", e)
