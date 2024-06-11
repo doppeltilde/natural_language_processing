@@ -29,6 +29,7 @@ def summarization_model(model_name):
         summarizer = pipeline(
             "summarization",
             model=_model_name,
+            device=device,
         )
 
         return summarizer
