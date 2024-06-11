@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Query, Depends
 from src.middleware.auth.auth import get_api_key
 from src.shared.shared import summarization_model
+import time
 
 router = APIRouter()
 
@@ -10,10 +11,14 @@ async def summarization(
     text: str,
     model_name: str = Query(None),
 ):
+    start_time = time.time()
     summarizer = summarization_model(model_name)
     try:
         summary = summarizer(text)
-        return {"res": summary}
+        return {
+            "execution_time": time.time() - start_time,
+            "res": summary,
+        }
 
     except Exception as e:
         print("Something went wrong: ", e)

@@ -22,13 +22,9 @@ jobs:
           matrix:
             include:
               - docker_file: Dockerfile
-                tag-suffix: cpu
-                latest-tag: latest
                 label: "latest"
               - docker_file: Dockerfile.cuda
-                tag-suffix: cuda
-                latest-tag: latest-cuda
-                label: "cuda"
+                label: "latest-cuda"
         steps:
             - uses: actions/checkout@v4
 
@@ -62,6 +58,7 @@ jobs:
                 push: ${{ github.event_name != 'pull_request' }}
                 tags: |
                   ${{ steps.meta.outputs.tags }}
-                  ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.latest-tag }}
+                  ${{ matrix.docker_file == 'Dockerfile' && matrix.label == 'latest' && env.REGISTRY }}/{{ env.IMAGE_NAME }}:latest
+                  ${{ matrix.docker_file == 'Dockerfile.cuda' && matrix.label == 'latest-cuda' && env.REGISTRY }}/{{ env.IMAGE_NAME }}:latest-cuda
                 labels: ${{ steps.meta.outputs.labels }}
                 platforms: linux/amd64,linux/arm64

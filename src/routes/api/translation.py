@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Query, Depends
 from src.middleware.auth.auth import get_api_key
 from src.shared.shared import translation_model
+import time
 
 router = APIRouter()
 
@@ -12,11 +13,15 @@ async def translation(
     input_language: str = Query("en", description="Input language"),
     output_language: str = Query("de", description="Output language"),
 ):
+    start_time = time.time()
     translator = translation_model(model_name, input_language, output_language)
 
     try:
         translation = translator(text)
-        return {"res": translation}
+        return {
+            "execution_time": time.time() - start_time,
+            "res": translation,
+        }
 
     except Exception as e:
         print("Something went wrong: ", e)
