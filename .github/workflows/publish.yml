@@ -50,6 +50,7 @@ jobs:
               uses: docker/build-push-action@v5
               with:
                 context: .
+                file: ${{ matrix.docker_file }}
                 push: ${{ github.event_name != 'pull_request' }}
                 tags: ${{ steps.meta.outputs.tags }}
                 platforms: linux/amd64,linux/arm64
