@@ -9,7 +9,7 @@
 
 - For ease of use it's recommended to use the provided [docker-compose.yml](https://github.com/doppeltilde/natural_language_processing/blob/main/docker-compose.yml).
 
-**CPU Support:** Use the `latest` tag for the images.
+**CPU Support:** Use the `latest` tag.
 ```yml
 services:
   natural_language_processing:
@@ -30,7 +30,7 @@ volumes:
   models:
 ```
 
-**NVIDIA GPU Support:** Use the `latest-cuda` tag for the images.
+**NVIDIA GPU Support:** Use the `latest-cuda` tag.
 ```yml
 services:
   natural_language_processing_cuda:
