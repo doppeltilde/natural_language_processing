@@ -20,11 +20,12 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
           matrix:
-            dockerfile: [Dockerfile, Dockerfile.cuda]
             include:
-              - dockerfile: Dockerfile
-              - dockerfile: Dockerfile.cuda
-                tag-suffix: -cuda
+              - docker_file: Dockerfile
+                platforms: linux/arm64,linux/amd64
+              - docker_file: Dockerfile.cuda
+                tag_extension: -cuda
+                platforms: linux/arm64,linux/amd64
         steps:
             - uses: actions/checkout@v4
 
