@@ -58,7 +58,7 @@ jobs:
                 push: ${{ github.event_name != 'pull_request' }}
                 tags: |
                   ${{ steps.meta.outputs.tags }}
-                  ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.label == 'latest' && matrix.docker_file == 'Dockerfile' && 'latest' || '' }}
-                  ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.label == 'latest-cuda' && matrix.docker_file == 'Dockerfile.cuda' && 'latest-cuda' || '' }}
+                  ${{ matrix.docker_file == 'Dockerfile' && matrix.label == 'latest' && env.REGISTRY }}/{{ env.IMAGE_NAME }}:latest || ""
+                  ${{ matrix.docker_file == 'Dockerfile.cuda' && matrix.label == 'latest-cuda' && env.REGISTRY }}/{{ env.IMAGE_NAME }}:latest-cuda || ""
                 labels: ${{ steps.meta.outputs.labels }}
                 platforms: linux/amd64,linux/arm64
