@@ -18,6 +18,13 @@ permissions:
 jobs:
     build_and_publish:
         runs-on: ubuntu-latest
+        strategy:
+          matrix:
+            dockerfile: [Dockerfile, Dockerfile.cuda]
+            include:
+              - dockerfile: Dockerfile
+              - dockerfile: Dockerfile.cuda
+                tag-suffix: -cuda
         steps:
             - uses: actions/checkout@v4
 

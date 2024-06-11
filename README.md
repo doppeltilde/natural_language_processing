@@ -8,6 +8,8 @@
 ## Installation
 
 - For ease of use it's recommended to use the provided [docker-compose.yml](https://github.com/doppeltilde/natural_language_processing/blob/main/docker-compose.yml).
+
+**CPU Support:** Use the `latest` tag for the images.
 ```yml
 services:
   natural_language_processing:
@@ -27,6 +29,39 @@ services:
 volumes:
   models:
 ```
+
+**NVIDIA GPU Support:** Use the `latest-cuda` tag for the images.
+```yml
+services:
+  natural_language_processing_cuda:
+    image: ghcr.io/doppeltilde/natural_language_processing:latest-cuda
+    ports:
+      - "8000:8000"
+    volumes:
+      - models:/root/.cache/huggingface/hub:rw
+    environment:
+      - DEFAULT_SUMMARIZATION_MODEL_NAME
+      - DEFAULT_TRANSLATION_MODEL_NAME
+      - ACCESS_TOKEN
+      - DEFAULT_SCORE
+      - USE_API_KEYS
+      - API_KEYS
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
+
+volumes:
+  models:
+```
+
+---
+
+### Environment Variables
 
 - Create a `.env` file and set the preferred values.
 ```sh
