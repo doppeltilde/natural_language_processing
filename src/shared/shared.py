@@ -14,6 +14,10 @@ default_translation_model_name = os.getenv(
     "DEFAULT_TRANSLATION_MODEL_NAME", "google-t5/t5-base"
 )
 
+default_text_classification_model_name = os.getenv(
+    "DEFAULT_TEXT_CLASSIFICATION_MODEL_NAME", "s-nlp/roberta_toxicity_classifier"
+)
+
 device = 0 if torch.cuda.is_available() else -1
 
 # API KEY
@@ -46,6 +50,22 @@ def translation_model(model_name, input_language, output_language):
 
         translator = pipeline(
             task_name,
+            model=_model_name,
+            device=device,
+        )
+
+        return translator
+    except Exception as e:
+        print(e)
+        return {"error": str(e)}
+
+
+def text_classification_model(model_name):
+    try:
+        _model_name = model_name or default_text_classification_model_name
+
+        translator = pipeline(
+            "text-classification",
             model=_model_name,
             device=device,
         )

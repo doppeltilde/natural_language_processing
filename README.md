@@ -21,6 +21,7 @@ services:
     environment:
       - DEFAULT_SUMMARIZATION_MODEL_NAME
       - DEFAULT_TRANSLATION_MODEL_NAME
+      - DEFAULT_TEXT_CLASSIFICATION_MODEL_NAME
       - ACCESS_TOKEN
       - USE_API_KEYS
       - API_KEYS
@@ -42,6 +43,7 @@ services:
     environment:
       - DEFAULT_SUMMARIZATION_MODEL_NAME
       - DEFAULT_TRANSLATION_MODEL_NAME
+      - DEFAULT_TEXT_CLASSIFICATION_MODEL_NAME
       - ACCESS_TOKEN
       - DEFAULT_SCORE
       - USE_API_KEYS
@@ -67,6 +69,7 @@ volumes:
 ```sh
 DEFAULT_SUMMARIZATION_MODEL_NAME=Falconsai/text_summarization
 DEFAULT_TRANSLATION_MODEL_NAME=google-t5/t5-base
+DEFAULT_TEXT_CLASSIFICATION_MODEL_NAME=s-nlp/roberta_toxicity_classifier
 ACCESS_TOKEN=
 
 # False == Public Access
@@ -80,6 +83,7 @@ API_KEYS=abc,123,xyz
 ## Supported NLP tasks
 - [x] [Summarization](https://huggingface.co/tasks/summarization)
 - [x] [Translation](https://huggingface.co/tasks/translation)
+- [x] [Text Classification](https://huggingface.co/tasks/text-classification)
 
 ## Models
 Any model designed for above tasks and compatible with huggingface transformers should work.
