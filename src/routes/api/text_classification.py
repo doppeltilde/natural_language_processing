@@ -2,6 +2,7 @@ from fastapi import APIRouter, Query, Depends
 from src.middleware.auth.auth import get_api_key
 from src.shared.shared import text_classification_model
 import time
+import torch
 
 router = APIRouter()
 
@@ -23,3 +24,7 @@ async def text_classification(
     except Exception as e:
         print("Something went wrong: ", e)
         return {"error": str(e)}
+
+    finally:
+        del text_classifier
+        torch.cuda.empty_cache()

@@ -2,6 +2,7 @@ from fastapi import APIRouter, Query, Depends
 from src.middleware.auth.auth import get_api_key
 from src.shared.shared import translation_model
 import time
+import torch
 
 router = APIRouter()
 
@@ -26,3 +27,7 @@ async def translation(
     except Exception as e:
         print("Something went wrong: ", e)
         return {"error": str(e)}
+
+    finally:
+        del translator
+        torch.cuda.empty_cache()
